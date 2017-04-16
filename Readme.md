@@ -2,7 +2,7 @@
 
 My mum owns a bookstore and wanted a better way to visualise the top selling books in her bookstore.  So this is my attempt. 
 
-This code uses Bokeh and Pandas to display the top selling books.  The number of top-sellers, the category, and the number of prior days over which to determine the top-sellers. Only one month of (anominized) sales data is provided so the date range starting point is 30/11/2015. 
+This code uses Bokeh and Pandas to display the top selling books.  The number of top-sellers, the category, and the number of prior days over which to determine the top-sellers. Only one month of (anonymized) sales data is provided so the date range starting point is 30/11/2015. 
 
 ## Requirements
 
