@@ -13,13 +13,16 @@ This code uses Bokeh and Pandas to display the top selling books.  The number of
 
 
 ## Usage
-Download the repo.
+To run locally:
+
+    Download the repo.
 
 
-To run the tool enter:
-`bokeh serve --show bookstore_dashboard`
+    To run the tool enter: `bokeh serve --show app` into the command line from the parent directory.
 
-into the command line from the parent directory.
+    This will launch a web browser and display the top-sellers.  Use the widgets to change the selections.
 
-This will launch a web browser and display the top-sellers.  Use the widgets to change the selections.
+To access via the internet:
+
+    The app is running on Heroku and can be accessed [here](https://rocky-shelf-31398.herokuapp.com/app)
  
