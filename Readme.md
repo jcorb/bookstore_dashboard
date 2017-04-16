@@ -17,8 +17,8 @@ Download the repo.
 
 
 To run the tool enter:
-```
-bokeh serve --show bookstore_dashboard```
+`bokeh serve --show bookstore_dashboard`
+
 into the command line from the parent directory.
 
 This will launch a web browser and display the top-sellers.  Use the widgets to change the selections.
