@@ -41,14 +41,14 @@ def trim_title(str_x):
     else:
         return str_x
 
-div = Div(text="""<h1>Bookstore Dashboard</h1> This interactively displays the top selling books by category for a 
+div = Div(text="""<h1>Bookstore Dashboard</h1> The graph below interactively displays the top selling books by category for a 
                     bookstore over a number of days.  
                     <h3>To use:</h3> 
                     <ol>
-                      <li>Select the category you wish to display from the drop-down menu</li>
-                      <li>Use the slider to select the number of days over which you want to determine the top-sellers. 
-                      <i>Note: This is not currently dynamic, and will display the top-sellers over N days prior to November 30th 2015</i></li>
-                      <li>Use the slider to select the number of top-sellers you want to display (1-25)</li>
+                      <li>Select the category you wish to display from the drop-down menu, or select "all" for all categories</li>
+                      <li>Use the "Last N Days" slider to select the number of days over which you want to determine the top-sellers. 
+                      <i>Note: The date from which this is determined is not todays date.  For this example it will display the top-sellers over N days prior to November 30th 2015</i></li>
+                      <li>Use the "Number of Top Sellers" slider to select the number of top-sellers you want to display (1-25)</li>
                     </ol>
                     Changing any of these will update the plots to reflect the new selections.  If the full title is not displayed, hover the mouse
                     over the bar to display the full title.
