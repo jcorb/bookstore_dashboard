@@ -27,7 +27,7 @@ def category_selector(attr, old, new):
     top_sales.reset_index(inplace=True)
     top_sales.rename(columns={'index': 'title', 'Title': 'sales'}, inplace=True)
     top_sales['short_title'] = top_sales['title'].apply(trim_title)
-    top_counts_plot.y_range.factors = top_sales.short_title.values.tolist()
+    top_counts_plot.y_range.factors = top_sales.short_title.values.tolist()[::-1]
     top_counts_plot.x_range.end =  np.max(top_sales.sales) + 1
     top_sales_cds.data = ColumnDataSource(data=dict(titles=top_sales.short_title, counts=top_sales.sales,
                                                     fulltitle=top_sales.title)).data
@@ -47,14 +47,14 @@ div = Div(text="""<h1>Bookstore Dashboard</h1> The graph below interactively dis
                     <ol>
                       <li>Select the category you wish to display from the drop-down menu, or select "all" for all categories</li>
                       <li>Use the "Last N Days" slider to select the number of days over which you want to determine the top-sellers. 
-                      <i>Note: The date from which this is determined is not todays date.  For this example it will display the top-sellers over N days prior to November 30th 2015</i></li>
+                      <i>Note: For this example it will display the top-sellers over the "N" number of days prior to November 30th 2015</i></li>
                       <li>Use the "Number of Top Sellers" slider to select the number of top-sellers you want to display (1-25)</li>
                     </ol>
                     Changing any of these will update the plots to reflect the new selections.  If the full title is not displayed, hover the mouse
                     over the bar to display the full title.
                     <i>Note: In order to anonymize the sales data the words in the book titles were randomly replaced, thus the titles are just jibberish.</i>
                     """,
-          width=600, height=255)
+          width=600, height=285)
 
 
 ## Load the sales file
@@ -92,7 +92,7 @@ hover = HoverTool(
                     ("Sales", "@counts")])
 
 top_counts_plot = figure(title="Top Sellers", x_axis_label='Sales', tools=[hover], toolbar_location='right',
-            y_range=top_sales.short_title.values.tolist(), x_range=[0,np.max(top_sales.sales) + 5])
+            y_range=top_sales.short_title.values.tolist()[::-1], x_range=[0,np.max(top_sales.sales) + 5])
 
 
 top_counts_plot.hbar(y='titles', height=0.3, left=0, right='counts', source=top_sales_cds, color="deepskyblue" )
