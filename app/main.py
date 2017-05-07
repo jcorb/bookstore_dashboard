@@ -21,9 +21,15 @@ def category_selector(attr, old, new):
     if cat_select.value == 'All':
         top_sales = sales[(sales["Invoice Date"] > day_min) & (sales["Invoice Date"] <= day_max)]['Title'].value_counts()[0:n_slider.value]
     else:
-        top_sales = sales[(sales["Invoice Date"] > day_min) & (sales["Invoice Date"] <= day_max)]['Title'][sales.Category == cat_select.value].value_counts()[0:n_slider.value]
-
+        top_sales = sales[(sales["Invoice Date"] > day_min) & (sales["Invoice Date"] <= day_max)]['Title'][sales.Category ==
+                                                                                                           cat_select.value].value_counts()[0:n_slider.value]
+    no_data_text.visible = False
     top_sales = top_sales.to_frame()
+    if top_sales.empty:
+        #handle the case in which there is no data for the selection
+        top_sales = pd.DataFrame({"Title":0}, index=[''])
+        no_data_text.visible = True
+
     top_sales.reset_index(inplace=True)
     top_sales.rename(columns={'index': 'title', 'Title': 'sales'}, inplace=True)
     top_sales['short_title'] = top_sales['title'].apply(trim_title)
@@ -94,6 +100,10 @@ hover = HoverTool(
 top_counts_plot = figure(title="Top Sellers", x_axis_label='Sales', tools=[hover], toolbar_location='right',
             y_range=top_sales.short_title.values.tolist()[::-1], x_range=[0,np.max(top_sales.sales) + 5])
 
+# Add the year in background (add before circle)
+no_data_text  = top_counts_plot.text(0, 0, text='No Data \n Please make a new selection', text_color='deepskyblue',alpha=0.6667,
+                                     text_font_size='30pt', text_baseline='middle',text_align='center')
+no_data_text.visible = False
 
 top_counts_plot.hbar(y='titles', height=0.3, left=0, right='counts', source=top_sales_cds, color="deepskyblue" )
 
