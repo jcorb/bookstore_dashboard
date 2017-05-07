@@ -28,6 +28,7 @@ def category_selector(attr, old, new):
     if top_sales.empty:
         #handle the case in which there is no data for the selection
         top_sales = pd.DataFrame({"Title":0}, index=[''])
+        text_cds.data = ColumnDataSource(dict(x=[0.5], y=[''],text=['No Data'])).data
         no_data_text.visible = True
 
     top_sales.reset_index(inplace=True)
@@ -100,10 +101,11 @@ hover = HoverTool(
 top_counts_plot = figure(title="Top Sellers", x_axis_label='Sales', tools=[hover], toolbar_location='right',
             y_range=top_sales.short_title.values.tolist()[::-1], x_range=[0,np.max(top_sales.sales) + 5])
 
+text_cds = ColumnDataSource(dict(x=[0], y=[0],text=['No Data']))
 # Add the year in background (add before circle)
-no_data_text  = top_counts_plot.text(0, 0, text='No Data \n Please make a new selection', text_color='deepskyblue',alpha=0.6667,
-                                     text_font_size='30pt', text_baseline='middle',text_align='center')
-no_data_text.visible = False
+no_data_text  = top_counts_plot.text(x='x', y='y', text='text', text_color='tomato',alpha=1.0,
+                                     text_font_size='30pt', text_baseline='middle',text_align='center', source=text_cds)
+no_data_text.visible = True
 
 top_counts_plot.hbar(y='titles', height=0.3, left=0, right='counts', source=top_sales_cds, color="deepskyblue" )
 
